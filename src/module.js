@@ -1,1 +1,1 @@
-alert("ho");
+console.log("module.js started");

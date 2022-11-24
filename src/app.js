@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { WEBGL } from './webgl'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { DirectionalLightHelper, Spherical } from 'three';
+import { DirectionalLightHelper, Spherical, TextGeometry } from 'three';
 
 if (WEBGL.isWebGLAvailable()) {
 
@@ -159,8 +159,6 @@ if (WEBGL.isWebGLAvailable()) {
     sp.receiveShadow = true; 
     sp.position.set(-40, -170, 130);
     scene.add( sp );
-  
-
 
   // Orbit Control 시 추가해야 하는 코드
   function animate(){
