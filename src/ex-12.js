@@ -35,7 +35,7 @@ if (WEBGL.isWebGLAvailable()) {
   
   // 텍스쳐 추가 - 배열을 이용
   const skyMaterialArray = [];
-  const path = "https://github.com/iam149cm/threejs/blob/main";
+  const path = "https://raw.githubusercontent.com/iam149cm/threejs/main/";
   const texture_bk = new THREE.TextureLoader().load(path + '/static/img/skybox/paze_bk.jpg');
   const texture_dn = new THREE.TextureLoader().load(path + '/static/img/skybox/paze_dn.jpg');
   const texture_ft = new THREE.TextureLoader().load(path + '/static/img/skybox/paze_ft.jpg');
