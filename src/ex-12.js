@@ -35,12 +35,14 @@ if (WEBGL.isWebGLAvailable()) {
   
   // 텍스쳐 추가 - 배열을 이용
   const skyMaterialArray = [];
-  const texture_bk = new THREE.TextureLoader().load('../static/img/skybox/paze_bk.jpg');
-  const texture_dn = new THREE.TextureLoader().load('../static/img/skybox/paze_dn.jpg');
-  const texture_ft = new THREE.TextureLoader().load('../static/img/skybox/paze_ft.jpg');
-  const texture_lf = new THREE.TextureLoader().load('../static/img/skybox/paze_lf.jpg');
-  const texture_rt = new THREE.TextureLoader().load('../static/img/skybox/paze_rt.jpg');
-  const texture_up = new THREE.TextureLoader().load('../static/img/skybox/paze_up.jpg');
+
+  const path = "https://raw.githubusercontent.com/iam149cm/threejs/main/";
+  const texture_bk = new THREE.TextureLoader().load(path + '/static/img/skybox/paze_bk.jpg');
+  const texture_dn = new THREE.TextureLoader().load(path + '/static/img/skybox/paze_dn.jpg');
+  const texture_ft = new THREE.TextureLoader().load(path + '/static/img/skybox/paze_ft.jpg');
+  const texture_lf = new THREE.TextureLoader().load(path + '/static/img/skybox/paze_lf.jpg');
+  const texture_rt = new THREE.TextureLoader().load(path + '/static/img/skybox/paze_rt.jpg');
+  const texture_up = new THREE.TextureLoader().load(path + '/static/img/skybox/paze_up.jpg');
 
 
   // push 할 때 순서가 중요하다 (ft-bk-up-dn-rt-lf)
