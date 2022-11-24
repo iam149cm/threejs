@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { WEBGL } from './webgl'
+import { WEBGL } from '../webgl'
 
 if (WEBGL.isWebGLAvailable()) {
 
