@@ -32,16 +32,16 @@ if (WEBGL.isWebGLAvailable()) {
   controls.maxDistance = 1200 ; // 마우스 휠로 줌아웃 시 최대값 (obj 크기보다 작아야 함)
   controls.maxPolarAngle = Math.PI  ; // 회전 시 각도 조절.
   controls.update();
-
-
+  
   // 텍스쳐 추가 - 배열을 이용
   const skyMaterialArray = [];
-  const texture_bk = new THREE.TextureLoader().load('../static/img/skybox/paze_bk.jpg');
-  const texture_dn = new THREE.TextureLoader().load('../static/img/skybox/paze_dn.jpg');
-  const texture_ft = new THREE.TextureLoader().load('../static/img/skybox/paze_ft.jpg');
-  const texture_lf = new THREE.TextureLoader().load('../static/img/skybox/paze_lf.jpg');
-  const texture_rt = new THREE.TextureLoader().load('../static/img/skybox/paze_rt.jpg');
-  const texture_up = new THREE.TextureLoader().load('../static/img/skybox/paze_up.jpg');
+  const path = "https://github.com/iam149cm/threejs/blob/main/";
+  const texture_bk = new THREE.TextureLoader().load(path + '../static/img/skybox/paze_bk.jpg');
+  const texture_dn = new THREE.TextureLoader().load(path +'../static/img/skybox/paze_dn.jpg');
+  const texture_ft = new THREE.TextureLoader().load(path +'../static/img/skybox/paze_ft.jpg');
+  const texture_lf = new THREE.TextureLoader().load(path +'../static/img/skybox/paze_lf.jpg');
+  const texture_rt = new THREE.TextureLoader().load(path +'../static/img/skybox/paze_rt.jpg');
+  const texture_up = new THREE.TextureLoader().load(path +'../static/img/skybox/paze_up.jpg');
 
   // push 할 때 순서가 중요하다 (ft-bk-up-dn-rt-lf)
   skyMaterialArray.push(new THREE.MeshStandardMaterial({  map : texture_ft,   }) );
@@ -65,6 +65,7 @@ if (WEBGL.isWebGLAvailable()) {
 
 
   // 빛
+
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
   scene.add(ambientLight);
 
