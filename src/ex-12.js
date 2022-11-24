@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import { WEBGL } from './webgl'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { DirectionalLightHelper, Spherical } from 'three';
 
 if (WEBGL.isWebGLAvailable()) {
 
@@ -8,12 +9,9 @@ if (WEBGL.isWebGLAvailable()) {
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0xeeeeee);
 
-  const axesHelper = new THREE.AxesHelper(5);
-  scene.add(axesHelper);
-
   // 카메라
   const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 4000);
-  camera.position.set(0,20,100); 
+  camera.position.set(1200,240,800); 
   camera.lookAt(0, 0, 0);
 
   // 렌더러 
@@ -46,12 +44,12 @@ if (WEBGL.isWebGLAvailable()) {
 
 
   // push 할 때 순서가 중요하다 (ft-bk-up-dn-rt-lf)
-  skyMaterialArray.push(new THREE.MeshStandardMaterial({  map : texture_ft,   }) );
-  skyMaterialArray.push(new THREE.MeshStandardMaterial({  map : texture_bk,   }) );
-  skyMaterialArray.push(new THREE.MeshStandardMaterial({  map : texture_up,   }) );
-  skyMaterialArray.push(new THREE.MeshStandardMaterial({  map : texture_dn,   }) );
-  skyMaterialArray.push(new THREE.MeshStandardMaterial({  map : texture_rt,   }) );
-  skyMaterialArray.push(new THREE.MeshStandardMaterial({  map : texture_lf,   }) );
+  skyMaterialArray.push(new THREE.MeshBasicMaterial({  map : texture_ft,   }) );
+  skyMaterialArray.push(new THREE.MeshBasicMaterial({  map : texture_bk,   }) );
+  skyMaterialArray.push(new THREE.MeshBasicMaterial({  map : texture_up,   }) );
+  skyMaterialArray.push(new THREE.MeshBasicMaterial({  map : texture_dn,   }) );
+  skyMaterialArray.push(new THREE.MeshBasicMaterial({  map : texture_rt,   }) );
+  skyMaterialArray.push(new THREE.MeshBasicMaterial({  map : texture_lf,   }) );
 
   for (let i = 0; i < 6; i++) {
     skyMaterialArray[i].side = THREE.BackSide
@@ -65,16 +63,53 @@ if (WEBGL.isWebGLAvailable()) {
   obj.position.z = 0;
   scene.add(obj);
 
-
-  // 빛
-
+  // 1. ambientLight
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
   scene.add(ambientLight);
+  // 2. Directional Light - 특정 방향으로 비추는 빛
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+  directionalLight.position.set(-70,30,30); // 1, 1, 1 위치에서 오브젝트를 쏜다
+
+  // 빛을 비추는 방향에 대해 Helper 를 지정해서 사용할 수 있다
+  const dlHelper = new THREE.DirectionalLightHelper(directionalLight, 0.5, 0xffffff);
+  scene.add(directionalLight);
+
+  // 축
+  // const axesHelper = new THREE.AxesHelper(50);
+  // axesHelper.position.set(-450,300,300);
+  // scene.add(axesHelper);
+
+  // 텍스쳐
+  const textureLoader = new THREE.TextureLoader();
+  // 텍스쳐로 활용할 이미지 경로
+  const textureBaseColor = textureLoader.load('../static/img/material/Marble_Carrara_003_COLOR.jpg'); 
+  const textureNormal = textureLoader.load('../static/img/material/Marble_Carrara_003_NORM.jpg'); 
+  // const textureHeight = textureLoader.load('../static/img/material/Surface_Imperfections_002_height.png'); 
+  const textureRoughness = textureLoader.load('../static/img/material/Marble_Carrara_003_ROUGH.jpg'); 
+
+  // 도형
+  const geometry = new THREE.SphereGeometry( 100, 32, 16 );
+  const material = new THREE.MeshStandardMaterial( 
+    { color: 0xffffff,
+      opacity : 1,
+    transparent : true,
+    map : textureBaseColor,
+    normalMap : textureNormal,
+    refractionRatio: 100,
+    // displacementMap : textureHeight, // 울퉁불퉁함 추가
+    displacementScale : 1, // 울퉁불퉁함 조절
+    roughnessMap : textureRoughness, // 거칠기에 따를 빛 표현 추가
+    roughness : 5 // 빛 반사 표현 조절
+    } );
+  const sphere = new THREE.Mesh( geometry, material );
+  sphere.castShadow = true;
+  sphere.receiveShadow = true; 
+  scene.add( sphere );
 
   // Orbit Control 시 추가해야 하는 코드
   function animate(){
     requestAnimationFrame(animate);
-    // obj.rotation.y += 0.01;
+    sphere.rotation.y += 0.01;
 
     controls.update();
     renderer.render(scene,camera);
