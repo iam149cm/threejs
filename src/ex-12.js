@@ -82,10 +82,10 @@ if (WEBGL.isWebGLAvailable()) {
   // 텍스쳐
   const textureLoader = new THREE.TextureLoader();
   // 텍스쳐로 활용할 이미지 경로
-  const textureBaseColor = textureLoader.load('../static/img/material/Marble_Carrara_003_COLOR.jpg'); 
-  const textureNormal = textureLoader.load('../static/img/material/Marble_Carrara_003_NORM.jpg'); 
+  const textureBaseColor = textureLoader.load(path +'/static/img/material/Marble_Carrara_003_COLOR.jpg'); 
+  const textureNormal = textureLoader.load(path +'/static/img/material/Marble_Carrara_003_NORM.jpg'); 
   // const textureHeight = textureLoader.load('../static/img/material/Surface_Imperfections_002_height.png'); 
-  const textureRoughness = textureLoader.load('../static/img/material/Marble_Carrara_003_ROUGH.jpg'); 
+  const textureRoughness = textureLoader.load(path +'/static/img/material/Marble_Carrara_003_ROUGH.jpg'); 
 
   // 도형
   const geometry = new THREE.SphereGeometry( 100, 32, 16 );
