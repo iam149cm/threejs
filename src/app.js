@@ -77,55 +77,98 @@ if (WEBGL.isWebGLAvailable()) {
   // axesHelper.position.set(-450,300,300);
   // scene.add(axesHelper);
 
-  // 텍스쳐 - sphear
+  // 도형 - sphear ---------------------------------------------
+  // 텍스쳐
   const textureLoader = new THREE.TextureLoader();
   // 텍스쳐로 활용할 이미지 경로
-  const textureBaseColor = textureLoader.load(path +'/static/img/material/Marble_Carrara_003_COLOR.jpg'); 
-  const textureNormal = textureLoader.load(path +'/static/img/material/Marble_Carrara_003_NORM.jpg'); 
-  // const textureHeight = textureLoader.load('../static/img/material/Surface_Imperfections_002_height.png'); 
-  const textureRoughness = textureLoader.load(path +'/static/img/material/Marble_Carrara_003_ROUGH.jpg'); 
-
-  // 도형 - sphear
+  const textureBaseColor_sph = textureLoader.load(path +'/static/img/material/Marble_Carrara_003_COLOR.jpg'); 
+  const textureNormal_sph = textureLoader.load(path +'/static/img/material/Marble_Carrara_003_NORM.jpg'); 
+  const textureRoughness_sph = textureLoader.load(path +'/static/img/material/Marble_Carrara_003_ROUGH.jpg'); 
   const geometrySphear = new THREE.SphereGeometry( 100, 32, 16 );
   const materialSphear = new THREE.MeshStandardMaterial( 
-    { // color: 0xffffff,
-    //   opacity : 1,
-    // transparent : true,
-    map : textureBaseColor,
-    normalMap : textureNormal,
-    // refractionRatio: 100,
-    // displacementMap : textureHeight, // 울퉁불퉁함 추가
-    // displacementScale : 1, // 울퉁불퉁함 조절
-    roughnessMap : textureRoughness, // 거칠기에 따를 빛 표현 추가
-    roughness : 5 // 빛 반사 표현 조절
-    } );
+    { 
+    map : textureBaseColor_sph,
+    normalMap : textureNormal_sph,
+    roughnessMap : textureRoughness_sph, 
+    roughness : 5  
+    });
   const sphere = new THREE.Mesh( geometrySphear, materialSphear );
   sphere.castShadow = true;
   sphere.receiveShadow = true; 
   scene.add( sphere );
 
-   // 도형 - Dodecahedron
-  //  const geometryDode = new THREE.DodecahedronGeometry( 50, 32, 16 );
-  //  const materialDode = new THREE.MeshStandardMaterial( 
-  //   { color: 0xffffff,
-  //     // opacity : 1,
-  //   // transparent : true,
-  //   // map : textureBaseColor,
-  //   // normalMap : textureNormal,
-  //   // refractionRatio: 100,
-  //   // displacementMap : textureHeight, // 울퉁불퉁함 추가
-  //   // displacementScale : 1, // 울퉁불퉁함 조절
-  //   // roughnessMap : textureRoughness, // 거칠기에 따를 빛 표현 추가
-  //   // roughness : 5 // 빛 반사 표현 조절
-  //   } );
-  //   const dode = new THREE.Mesh(geometryDode, materialDode );
+   // 도형 - Icosahedron (우) ---------------------------------------------
+   const textureBaseColor_ico = textureLoader.load('../static/img/material/Sapphire_001_COLOR.jpg'); 
+   const textureNormal_ico = textureLoader.load('../static/img/material/Sapphire_001_NORM.jpg'); 
+   const textureRoughness_ico = textureLoader.load('../static/img/material/Sapphire_001_ROUGH.jpg'); 
 
-  //   scene.add(dode);
+  const geometryIco = new THREE.IcosahedronGeometry(30);
+  const materialIco = new THREE.MeshStandardMaterial( 
+    { 
+      opacity : 0.8,
+    transparent : true,
+    map : textureBaseColor_ico,
+    normalMap : textureNormal_ico,
+    // refractionRatio: 100,
+    displacementScale : 10, // 울퉁불퉁함 조절
+    roughnessMap : textureRoughness_ico, // 거칠기에 따를 빛 표현 추가
+    roughness : 10 // 빛 반사 표현 조절
+    } );
+  const icosa = new THREE.Mesh( geometryIco, materialIco );
+  icosa.castShadow = true;
+  icosa.receiveShadow = true; 
+  icosa.position.set(300, 70, 30);
+  scene.add( icosa );
+
+  // 도형 - Octahedron (좌) ---------------------------------------------
+  const textureBaseColor_octa = textureLoader.load('../static/img/material/Crystal_001_COLOR.jpg'); 
+  const textureNormal_octa = textureLoader.load('../static/img/material/Crystal_001_NORM.jpg');  
+  const geometryOcta = new THREE.OctahedronGeometry(20);
+  const materialIOcta = new THREE.MeshStandardMaterial( 
+  { 
+  opacity : 0.6,
+  transparent : true,
+  map : textureBaseColor_octa,
+  normalMap : textureNormal_octa,
+  // refractionRatio: 100,
+  displacementScale : 10, // 울퉁불퉁함 조절
+  roughness : 10 // 빛 반사 표현 조절
+  } );
+  const octa = new THREE.Mesh( geometryOcta, materialIOcta );
+  octa.castShadow = true;
+  octa.receiveShadow = true; 
+  octa.position.set(-150, 70, 130);
+  scene.add( octa );
+
+    // 도형 - sphear (하) ---------------------------------------------
+    const textureBaseColor_sp = textureLoader.load('../static/img/material/Malachite_001_basecolor.jpg'); 
+    const textureNormal_sp = textureLoader.load('../static/img/material/Malachite_001_normal.jpg');  
+    const geometrySp = new THREE.SphereGeometry(40);
+    const materialSp = new THREE.MeshStandardMaterial( 
+    { 
+    opacity : 0.5,
+    transparent : true,
+    map : textureBaseColor_sp,
+    normalMap : textureNormal_sp,
+    // refractionRatio: 100,
+    displacementScale : 10, // 울퉁불퉁함 조절
+    roughness : 10 // 빛 반사 표현 조절
+    } );
+    const sp = new THREE.Mesh( geometrySp, materialSp );
+    sp.castShadow = true;
+    sp.receiveShadow = true; 
+    sp.position.set(-40, -170, 130);
+    scene.add( sp );
+  
+
 
   // Orbit Control 시 추가해야 하는 코드
   function animate(){
     requestAnimationFrame(animate);
     sphere.rotation.y += 0.01;
+    icosa.rotation.z += 0.005;
+    octa.rotation.y -= 0.01;
+    sp.rotation.x += 0.02; 
 
     controls.update();
     renderer.render(scene,camera);
