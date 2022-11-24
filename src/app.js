@@ -98,9 +98,9 @@ if (WEBGL.isWebGLAvailable()) {
   scene.add( sphere );
 
    // 도형 - Icosahedron (우) ---------------------------------------------
-   const textureBaseColor_ico = textureLoader.load('../static/img/material/Sapphire_001_COLOR.jpg'); 
-   const textureNormal_ico = textureLoader.load('../static/img/material/Sapphire_001_NORM.jpg'); 
-   const textureRoughness_ico = textureLoader.load('../static/img/material/Sapphire_001_ROUGH.jpg'); 
+   const textureBaseColor_ico = textureLoader.load(path+'/static/img/material/Sapphire_001_COLOR.jpg'); 
+   const textureNormal_ico = textureLoader.load(path+'/static/img/material/Sapphire_001_NORM.jpg'); 
+   const textureRoughness_ico = textureLoader.load(path+'/static/img/material/Sapphire_001_ROUGH.jpg'); 
 
   const geometryIco = new THREE.IcosahedronGeometry(30);
   const materialIco = new THREE.MeshStandardMaterial( 
@@ -121,8 +121,8 @@ if (WEBGL.isWebGLAvailable()) {
   scene.add( icosa );
 
   // 도형 - Octahedron (좌) ---------------------------------------------
-  const textureBaseColor_octa = textureLoader.load('../static/img/material/Crystal_001_COLOR.jpg'); 
-  const textureNormal_octa = textureLoader.load('../static/img/material/Crystal_001_NORM.jpg');  
+  const textureBaseColor_octa = textureLoader.load(path+'/static/img/material/Crystal_001_COLOR.jpg'); 
+  const textureNormal_octa = textureLoader.load(path+'/static/img/material/Crystal_001_NORM.jpg');  
   const geometryOcta = new THREE.OctahedronGeometry(20);
   const materialIOcta = new THREE.MeshStandardMaterial( 
   { 
@@ -141,8 +141,8 @@ if (WEBGL.isWebGLAvailable()) {
   scene.add( octa );
 
     // 도형 - sphear (하) ---------------------------------------------
-    const textureBaseColor_sp = textureLoader.load('../static/img/material/Malachite_001_basecolor.jpg'); 
-    const textureNormal_sp = textureLoader.load('../static/img/material/Malachite_001_normal.jpg');  
+    const textureBaseColor_sp = textureLoader.load(path+'/static/img/material/Malachite_001_basecolor.jpg'); 
+    const textureNormal_sp = textureLoader.load(path+'/static/img/material/Malachite_001_normal.jpg');  
     const geometrySp = new THREE.SphereGeometry(40);
     const materialSp = new THREE.MeshStandardMaterial( 
     { 
