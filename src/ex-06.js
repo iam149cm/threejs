@@ -2,8 +2,6 @@ import * as THREE from 'three'
 import { WEBGL } from './webgl'
 
 if (WEBGL.isWebGLAvailable()) {
-
- 
   // 장면
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0xffffff);  
@@ -26,27 +24,31 @@ if (WEBGL.isWebGLAvailable()) {
   pointLight.position.set(0, 2, 12);
   scene.add(pointLight);
  
-  // geometry 는 하나만 등록한다
-  const geometry = new THREE.TorusGeometry(0.3, 0.15, 16, 40);
+  // 텍스쳐
+  const textureLoader = new THREE.TextureLoader();
+  // 텍스쳐로 활용할 이미지 경로
+  const textureBaseColor = textureLoader.load('../static/img/Wall_Stone_010_basecolor.jpg'); 
+  const textureNormal = textureLoader.load('../static/img/Wall_Stone_010_normal.jpg'); 
+  const textureHeight = textureLoader.load('../static/img/Wall_Stone_010_height.png'); 
+  const textureRoughness = textureLoader.load('../static/img/Wall_Stone_010_roughness.jpg'); 
 
-    // 메쉬 01 : MeshBasicMaterial - 빛에 영향을 받지 않는다
-     const material01 = new THREE.MeshBasicMaterial({
-      color : 0xFF7F00,
+
+  // geometry 는 하나만 등록한다
+  const geometry = new THREE.SphereGeometry(0.3, 32, 16);
+
+    // 메쉬 01 
+     const material01 = new THREE.MeshStandardMaterial({
+      map : textureBaseColor,
     });
-    material01.wireframe = true;
     const obj01 = new THREE.Mesh(geometry, material01); 
     obj01.position.x = -2;
     scene.add(obj01);
 
     
-   // 메쉬 02 : MeshStandardMaterial - 3d 프로그램에서 사용하는 표준
+   // 메쉬 02 : normalMap - 법선 매핑. 빛을 통해 더 입체감있게 표현
    const material02 = new THREE.MeshStandardMaterial({
-     color : 0xFF7F00,
-     // metalness : 0.6, // 재질
-     // roughness : 0.4, // 거칠기
-     // wireframe : true,
-     // transparent : true, // 투명도
-     // opacity : 0.5,
+      map : textureBaseColor,
+      normalMap : textureNormal, // 입체감 추가
    });
    
 
@@ -54,36 +56,30 @@ if (WEBGL.isWebGLAvailable()) {
    obj02.position.x = -1;
    scene.add(obj02);
 
-    // 메쉬 03 - MeshDepthMaterial / MeshPhysicalMaterial
-  const material03 = new THREE.MeshPhysicalMaterial({
-    color : 0xFF7F00,
-    clearcoat : 1,
-    clearcoatRoughness : 0.3
+    // 메쉬 03 : displacementMap - 매시 높낮이를 밝고 어두움으로 표현
+  const material03 = new THREE.MeshStandardMaterial({
+    map : textureBaseColor,
+    normalMap : textureNormal,
+    displacementMap : textureHeight, // 울퉁불퉁함 추가
+    displacementScale : 0.05, // 울퉁불퉁함 조절
   });
   const obj03 = new THREE.Mesh(geometry, material03); 
   obj03.position.x = 0;
   scene.add(obj03);
 
-   // 메쉬 04 - MeshLambertMaterial
-   const material04 = new THREE.MeshLambertMaterial({
-     color : 0xFF7F00,
+   // 메쉬 04
+   const material04 = new THREE.MeshStandardMaterial({
+    map : textureBaseColor,
+    normalMap : textureNormal,
+    displacementMap : textureHeight, // 울퉁불퉁함 추가
+    displacementScale : 0.05, // 울퉁불퉁함 조절
+    roughnessMap : textureRoughness, // 거칠기에 따를 빛 표현 추가
+    roughness : 0.5 // 빛 반사 표현 조절
    });
    const obj04 = new THREE.Mesh(geometry, material04); 
    obj04.position.x = 1;
    scene.add(obj04);
-
-    // 메쉬 05 - MeshPhongMaterial
-  const material05 = new THREE.MeshPhongMaterial({
-    color : 0xFF7F00,
-    shininess : 60,
-    specular : 0x004fff, // 광의 색상
-  });
-  const obj05 = new THREE.Mesh(geometry, material05); 
-  obj05.position.x = 2;
-  scene.add(obj05);
-
-
-
+ 
   // 애니메이션
   function render(time) {
     time *= 0.0005;  // convert time to seconds
@@ -91,7 +87,7 @@ if (WEBGL.isWebGLAvailable()) {
     obj02.rotation.y += 0.01;
     obj03.rotation.y += 0.01;
     obj04.rotation.y += 0.01;
-    obj05.rotation.y += 0.01;
+ 
     renderer.render(scene, camera);
    
     requestAnimationFrame(render);
