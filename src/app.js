@@ -1,7 +1,8 @@
 import * as THREE from 'three'
 import { WEBGL } from './webgl'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { DirectionalLightHelper, Spherical, TextGeometry } from 'three';
+import { Interaction } from 'three.interaction'; 
+import { TWEEN } from 'three/examples/jsm/libs/tween.module.min';
 
 if (WEBGL.isWebGLAvailable()) {
 
@@ -22,6 +23,9 @@ if (WEBGL.isWebGLAvailable()) {
   renderer.setSize(window.innerWidth, window.innerHeight);  
   renderer.shadowMap.enabled = true; // 그림자를 사용하겠다
   document.body.appendChild(renderer.domElement);
+
+  // interaction
+  const interaction = new Interaction(renderer, scene, camera);
 
   // OrbitControls 추가 - 카메라 세팅 이후 설정해야 한다
   const controls = new OrbitControls(camera, renderer.domElement);
@@ -87,6 +91,7 @@ if (WEBGL.isWebGLAvailable()) {
   const geometrySphear = new THREE.SphereGeometry( 100, 32, 16 );
   const materialSphear = new THREE.MeshStandardMaterial( 
     { 
+    transparent : true,
     map : textureBaseColor_sph,
     normalMap : textureNormal_sph,
     roughnessMap : textureRoughness_sph, 
@@ -105,7 +110,6 @@ if (WEBGL.isWebGLAvailable()) {
   const geometryIco = new THREE.IcosahedronGeometry(30);
   const materialIco = new THREE.MeshStandardMaterial( 
     { 
-      opacity : 0.8,
     transparent : true,
     map : textureBaseColor_ico,
     normalMap : textureNormal_ico,
@@ -126,7 +130,6 @@ if (WEBGL.isWebGLAvailable()) {
   const geometryOcta = new THREE.OctahedronGeometry(20);
   const materialIOcta = new THREE.MeshStandardMaterial( 
   { 
-  opacity : 0.6,
   transparent : true,
   map : textureBaseColor_octa,
   normalMap : textureNormal_octa,
@@ -146,7 +149,7 @@ if (WEBGL.isWebGLAvailable()) {
     const geometrySp = new THREE.SphereGeometry(40);
     const materialSp = new THREE.MeshStandardMaterial( 
     { 
-    opacity : 0.5,
+  
     transparent : true,
     map : textureBaseColor_sp,
     normalMap : textureNormal_sp,
@@ -160,6 +163,24 @@ if (WEBGL.isWebGLAvailable()) {
     sp.position.set(-40, -170, 130);
     scene.add( sp );
 
+
+    icosa.on('click', (event) => {
+      fade(icosa);   
+      })
+      
+      sphere.on('click', (event) => {
+      fade(sphere);   
+      })
+      
+      octa.on('click', (event) => {
+      fade(octa);
+      })
+      
+      
+      sp.on('click', (event) => {
+      fade(sp);
+      })
+
   // Orbit Control 시 추가해야 하는 코드
   function animate(){
     requestAnimationFrame(animate);
@@ -169,9 +190,15 @@ if (WEBGL.isWebGLAvailable()) {
     sp.rotation.x += 0.02; 
 
     controls.update();
-    renderer.render(scene,camera);
+    TWEEN.update();
+    render();
+   
   }
   animate();
+
+  function render(){
+    renderer.render(scene,camera);
+  }
 
   // 반응형 처리
   function onWindowResize(){
@@ -184,4 +211,22 @@ if (WEBGL.isWebGLAvailable()) {
 } else {
   var warning = WEBGL.getWebGLErrorMessage()
   document.body.appendChild(warning)
+}
+
+
+// function -------------------------------------
+let targetOpacity = 0;
+function fade(mesh){
+  
+  new TWEEN.Tween(mesh.material)
+  .to({
+      opacity: targetOpacity,
+    },
+    800
+  )
+  .start()
+  .onComplete(() => {
+    !targetOpacity ? (targetOpacity = 1.0) : (targetOpacity = 0)
+})
+
 }

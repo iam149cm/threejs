@@ -5,14 +5,15 @@ canvas {
 }
 body{
   padding: 0;
-  margin: 0;
+  margin: 0 auto 0 auto;
 }
-#info {
-  font-size: xx-large;
-	position: absolute;
-	top: 10px;
-	width: 100%;
-	text-align: center;
-	z-index: 100;
-	display:block;
+.welcome {
+  margin : 50px 20% auto 20%;
+  color: #fff;
+  position:absolute;
+  z-index: 1; 
+  /* font-family: 'Montserrat', sans-serif; */
+  font-family: 'Sacramento', cursive;
+  font-weight: lighter;
+  font-size: 500% ;
 }
