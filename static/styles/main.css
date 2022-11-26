@@ -8,12 +8,12 @@ body{
   margin: 0 auto 0 auto;
 }
 .welcome {
-  margin : 50px 20% auto 20%;
+  margin : 100px auto;
   color: #fff;
   position:absolute;
   z-index: 1; 
   /* font-family: 'Montserrat', sans-serif; */
   font-family: 'Sacramento', cursive;
   font-weight: lighter;
-  font-size: 500% ;
+  font-size: 300% ;
 }
