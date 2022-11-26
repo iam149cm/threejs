@@ -1,19 +1,25 @@
 canvas { 
-  display: block; 
+  display: block;
   padding: 0;
   margin: 0;
 }
 body{
   padding: 0;
-  margin: 0 auto 0 auto;
+  margin: 0;
+  text-align: center;
 }
 .welcome {
-  margin : 100px auto;
   color: #fff;
   position:absolute;
   z-index: 1; 
+  
   /* font-family: 'Montserrat', sans-serif; */
   font-family: 'Sacramento', cursive;
   font-weight: lighter;
   font-size: 300% ;
+
+  width:300px;
+  left:50%;
+  margin-left:-150px;
+  margin-top : 10%
 }
