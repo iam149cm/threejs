@@ -5,6 +5,11 @@ $('.welcome').on('mouseover', () => {
  
 })
 
+$('.welcome').on('touchstart', () => {
+    $('.welcome').fadeOut();
+ 
+})
+
 function music() {
     const audioContainer = document.querySelector('#audioContainer');
     audioContainer.loop = true

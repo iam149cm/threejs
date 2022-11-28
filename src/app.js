@@ -3,7 +3,7 @@ import { WEBGL } from './webgl'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Interaction } from 'three.interaction'; 
 import { TWEEN } from 'three/examples/jsm/libs/tween.module.min';
-import { Mesh } from 'three';
+
 
 if (WEBGL.isWebGLAvailable()) {
 
@@ -157,7 +157,6 @@ if (WEBGL.isWebGLAvailable()) {
     // refractionRatio: 100,
     displacementScale : 10, // 울퉁불퉁함 조절
     roughness : 10, // 빛 반사 표현 조절
-
     } );
     const sp = new THREE.Mesh( geometrySp, materialSp );
     sp.castShadow = true;
@@ -170,33 +169,102 @@ if (WEBGL.isWebGLAvailable()) {
 
     // interaction ---------------------------------------------
     scene.on('click', (event) => {
-      music()
+      $('.welcome').fadeOut();
+      music();
+    })
+
+ 
+    // mouseover ---------------------------------------------
+    icosa.on('mouseover', (event) => {
+      toWireframe(icosa, event);
+    })
+
+    sphere.on('mouseover', (event) => {
+      // toWireframe(sphere, event);
+    })
+
+    octa.on('mouseover', (event) => {
+      toWireframe(octa, event);
+    })
+
+    sp.on('mouseover', (event) => {
+      toWireframe(sp, event);
+    })
+
+    // mouseout ---------------------------------------------
+    icosa.on('mouseout', (event) => {
+      toWireframe(icosa, event);
+    })
+
+    sp.on('mouseout', (event) => {
+      toWireframe(sp, event);
+    })
+
+    octa.on('mouseout', (event) => {
+      toWireframe(octa, event);
+    })
+    
+    sphere.on('mouseout', (event) => {
+      // toWireframe(sphere, event);
     })
 
 
-    icosa.on('click', (event) => {
-      // fade(icosa);   
-      window.open("https://iam149cm.github.io/naatCamp/3_Drum-Kit/index.html");
-      })
-      
-      sphere.on('click', (event) => {
-      fade(sphere);   
-      })
-      
-      octa.on('click', (event) => {
-      // fade(octa);
+    // touchstart ---------------------------------------------
+    scene.on('click', (event) => {
+      $('.touchstart').fadeOut();
+      music();
+    })
+
+  icosa.on('touchstart', (event) => {
+      toWireframe(icosa, event);
+    })
+
+    octa.on('touchstart', (event) => {
+      toWireframe(octa, event);
+    })
+
+    sp.on('touchstart', (event) => {
+      toWireframe(sp, event);
+    })
+    sphere.on('touchstart', (event) => {
+      // toWireframe(sphere, event);
+    })
+
+    // touchend ---------------------------------------------
+    icosa.on('touchend', (event) => {
+      toWireframe(icosa, event);
       window.open("https://iam149cm.github.io/naatCamp/2_TinDog/index.html");
-      })
       
+    })
+
+    octa.on('touchend', (event) => {
+      toWireframe(octa, event);
+      window.open("https://iam149cm.github.io/naatCamp/3_Drum-Kit/index.html");
+    })
+
+    sp.on('touchend', (event) => {
+      toWireframe(sp, event);
+    })
+    
+    sphere.on('touchend', (event) => {
+      // toWireframe(sphere, event);
+      window.open("https://sleepy-reading-7bf.notion.site/CV-c0e73f41082f4b7fbd71a2c90c9aa305");
+
+    })
+
+    // click ---------------------------------------------
+    icosa.on('click', (event) => {
+      window.open("https://iam149cm.github.io/naatCamp/2_TinDog/index.html");
+    })
       
-      sp.on('click', (event) => {
-      fade(sp);
-      })
-
-      sp.on('mouseover', (event) => {
-        cssUpdate(sp);
-        })
-
+    sphere.on('click', (event) => {
+      window.open("https://sleepy-reading-7bf.notion.site/CV-c0e73f41082f4b7fbd71a2c90c9aa305");
+    })
+      
+    octa.on('click', (event) => {
+      window.open("https://iam149cm.github.io/naatCamp/3_Drum-Kit/index.html")
+    })
+    
 
 
   // Orbit Control 시 추가해야 하는 코드
@@ -234,23 +302,30 @@ if (WEBGL.isWebGLAvailable()) {
 
 // function -------------------------------------
 let targetOpacity = 0;
+
 function fade(mesh){
   
   new TWEEN.Tween(mesh.material)
   .to({
       opacity: targetOpacity,
     },
-    800
+    500
   )
-  .start()
+  .start() 
   .onComplete(() => {
     !targetOpacity ? (targetOpacity = 1.0) : (targetOpacity = 0)
 })
 
 }
 
-function cssUpdate(mesh) {
-  console.log("UUID :: ", mesh.uuid);
+function toWireframe(mesh, event) {
+  // console.log("Mesh :::" , mesh , "event ::: ", event.type);
+
+  if (event.type === 'mouseover' || event.type === 'touchstart' ) {
+    mesh.material.wireframe = true;
+  } else if (event.type === 'mouseout' || event.type === 'touchend') {
+    mesh.material.wireframe = false;
+  }
 
 }
- 
+
