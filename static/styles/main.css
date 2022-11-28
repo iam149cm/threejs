@@ -18,8 +18,19 @@ body{
   font-weight: lighter;
   font-size: 300% ;
 
-  width:300px;
+  width:500px;
   left:50%;
   margin-left:-150px;
-  margin-top : 10%
+  margin-top : 20%;
+
+  cursor : default;
+
 }
+.welcome img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+ 

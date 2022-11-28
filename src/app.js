@@ -3,6 +3,7 @@ import { WEBGL } from './webgl'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Interaction } from 'three.interaction'; 
 import { TWEEN } from 'three/examples/jsm/libs/tween.module.min';
+import { Mesh } from 'three';
 
 if (WEBGL.isWebGLAvailable()) {
 
@@ -155,7 +156,8 @@ if (WEBGL.isWebGLAvailable()) {
     normalMap : textureNormal_sp,
     // refractionRatio: 100,
     displacementScale : 10, // 울퉁불퉁함 조절
-    roughness : 10 // 빛 반사 표현 조절
+    roughness : 10, // 빛 반사 표현 조절
+
     } );
     const sp = new THREE.Mesh( geometrySp, materialSp );
     sp.castShadow = true;
@@ -164,8 +166,17 @@ if (WEBGL.isWebGLAvailable()) {
     scene.add( sp );
 
 
+    
+
+    // interaction ---------------------------------------------
+    scene.on('click', (event) => {
+      music()
+    })
+
+
     icosa.on('click', (event) => {
-      fade(icosa);   
+      // fade(icosa);   
+      window.open("https://iam149cm.github.io/naatCamp/3_Drum-Kit/index.html");
       })
       
       sphere.on('click', (event) => {
@@ -173,13 +184,20 @@ if (WEBGL.isWebGLAvailable()) {
       })
       
       octa.on('click', (event) => {
-      fade(octa);
+      // fade(octa);
+      window.open("https://iam149cm.github.io/naatCamp/2_TinDog/index.html");
       })
       
       
       sp.on('click', (event) => {
       fade(sp);
       })
+
+      sp.on('mouseover', (event) => {
+        cssUpdate(sp);
+        })
+
+
 
   // Orbit Control 시 추가해야 하는 코드
   function animate(){
@@ -230,3 +248,9 @@ function fade(mesh){
 })
 
 }
+
+function cssUpdate(mesh) {
+  console.log("UUID :: ", mesh.uuid);
+
+}
+ 
