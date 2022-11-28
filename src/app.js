@@ -208,10 +208,23 @@ if (WEBGL.isWebGLAvailable()) {
       // toWireframe(sphere, event);
     })
 
+    // click ---------------------------------------------
+    icosa.on('click', (event) => {
+      window.open("https://iam149cm.github.io/naatCamp/2_TinDog/index.html");
+    })
+      
+    sphere.on('click', (event) => {
+      window.open("https://sleepy-reading-7bf.notion.site/CV-c0e73f41082f4b7fbd71a2c90c9aa305");
+    })
+      
+    octa.on('click', (event) => {
+      window.open("https://iam149cm.github.io/naatCamp/3_Drum-Kit/index.html")
+    })
+    
 
     // touchstart ---------------------------------------------
-    scene.on('click', (event) => {
-      $('.touchstart').fadeOut();
+    scene.on('touchstart', (event) => {
+      $('.welcome').fadeOut();
       music();
     })
 
@@ -251,21 +264,6 @@ if (WEBGL.isWebGLAvailable()) {
       window.open("https://sleepy-reading-7bf.notion.site/CV-c0e73f41082f4b7fbd71a2c90c9aa305");
 
     })
-
-    // click ---------------------------------------------
-    icosa.on('click', (event) => {
-      window.open("https://iam149cm.github.io/naatCamp/2_TinDog/index.html");
-    })
-      
-    sphere.on('click', (event) => {
-      window.open("https://sleepy-reading-7bf.notion.site/CV-c0e73f41082f4b7fbd71a2c90c9aa305");
-    })
-      
-    octa.on('click', (event) => {
-      window.open("https://iam149cm.github.io/naatCamp/3_Drum-Kit/index.html")
-    })
-    
-
 
   // Orbit Control 시 추가해야 하는 코드
   function animate(){
