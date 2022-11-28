@@ -108,7 +108,7 @@ if (WEBGL.isWebGLAvailable()) {
    const textureNormal_ico = textureLoader.load(path+'/static/img/material/Sapphire_001_NORM.jpg'); 
    const textureRoughness_ico = textureLoader.load(path+'/static/img/material/Sapphire_001_ROUGH.jpg'); 
 
-  const geometryIco = new THREE.IcosahedronGeometry(30);
+  const geometryIco = new THREE.IcosahedronGeometry(50);
   const materialIco = new THREE.MeshStandardMaterial( 
     { 
     transparent : true,
@@ -122,13 +122,13 @@ if (WEBGL.isWebGLAvailable()) {
   const icosa = new THREE.Mesh( geometryIco, materialIco );
   icosa.castShadow = true;
   icosa.receiveShadow = true; 
-  icosa.position.set(300, 70, 30);
+  icosa.position.set(400, 70, 30);
   scene.add( icosa );
 
   // 도형 - Octahedron (좌) ---------------------------------------------
   const textureBaseColor_octa = textureLoader.load(path+'/static/img/material/Crystal_001_COLOR.jpg'); 
   const textureNormal_octa = textureLoader.load(path+'/static/img/material/Crystal_001_NORM.jpg');  
-  const geometryOcta = new THREE.OctahedronGeometry(20);
+  const geometryOcta = new THREE.OctahedronGeometry(70);
   const materialIOcta = new THREE.MeshStandardMaterial( 
   { 
   transparent : true,
@@ -141,13 +141,13 @@ if (WEBGL.isWebGLAvailable()) {
   const octa = new THREE.Mesh( geometryOcta, materialIOcta );
   octa.castShadow = true;
   octa.receiveShadow = true; 
-  octa.position.set(-150, 70, 130);
+  octa.position.set(-300, 70, 130);
   scene.add( octa );
 
     // 도형 - sphear (하) ---------------------------------------------
     const textureBaseColor_sp = textureLoader.load(path+'/static/img/material/Malachite_001_basecolor.jpg'); 
     const textureNormal_sp = textureLoader.load(path+'/static/img/material/Malachite_001_normal.jpg');  
-    const geometrySp = new THREE.SphereGeometry(40);
+    const geometrySp = new THREE.SphereGeometry(60);
     const materialSp = new THREE.MeshStandardMaterial( 
     { 
   
@@ -161,7 +161,7 @@ if (WEBGL.isWebGLAvailable()) {
     const sp = new THREE.Mesh( geometrySp, materialSp );
     sp.castShadow = true;
     sp.receiveShadow = true; 
-    sp.position.set(-40, -170, 130);
+    sp.position.set(-40, -280, 150);
     scene.add( sp );
 
 
@@ -177,10 +177,6 @@ if (WEBGL.isWebGLAvailable()) {
     // mouseover ---------------------------------------------
     icosa.on('mouseover', (event) => {
       toWireframe(icosa, event);
-    })
-
-    sphere.on('mouseover', (event) => {
-      // toWireframe(sphere, event);
     })
 
     octa.on('mouseover', (event) => {
@@ -213,7 +209,7 @@ if (WEBGL.isWebGLAvailable()) {
       window.open("https://iam149cm.github.io/naatCamp/2_TinDog/index.html");
     })
       
-    sphere.on('click', (event) => {
+    sp.on('click', (event) => {
       window.open("https://sleepy-reading-7bf.notion.site/CV-c0e73f41082f4b7fbd71a2c90c9aa305");
     })
       
@@ -257,13 +253,10 @@ if (WEBGL.isWebGLAvailable()) {
 
     sp.on('touchend', (event) => {
       toWireframe(sp, event);
-    })
-    
-    sphere.on('touchend', (event) => {
-      // toWireframe(sphere, event);
       window.open("https://sleepy-reading-7bf.notion.site/CV-c0e73f41082f4b7fbd71a2c90c9aa305");
 
     })
+
 
   // Orbit Control 시 추가해야 하는 코드
   function animate(){
