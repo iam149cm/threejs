@@ -206,15 +206,15 @@ if (WEBGL.isWebGLAvailable()) {
 
     // click ---------------------------------------------
     icosa.on('click', (event) => {
-      window.open("https://iam149cm.github.io/naatCamp/2_TinDog/index.html");
+      window.open("https://iam149cm.github.io/naatCamp/2_TinDog/");
     })
       
     sp.on('click', (event) => {
-      window.open("https://sleepy-reading-7bf.notion.site/CV-c0e73f41082f4b7fbd71a2c90c9aa305");
+      window.open("https://iam149cm.github.io/naatCamp/4_Simon-Game/");
     })
       
     octa.on('click', (event) => {
-      window.open("https://iam149cm.github.io/naatCamp/3_Drum-Kit/index.html")
+      window.open("https://iam149cm.github.io/naatCamp/3_Drum-Kit/")
     })
     
 
