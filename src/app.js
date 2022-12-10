@@ -242,18 +242,18 @@ if (WEBGL.isWebGLAvailable()) {
     // touchend ---------------------------------------------
     icosa.on('touchend', (event) => {
       toWireframe(icosa, event);
-      window.open("https://iam149cm.github.io/naatCamp/2_TinDog/index.html");
+      window.open("https://iam149cm.github.io/naatCamp/2_TinDog/");
       
     })
 
     octa.on('touchend', (event) => {
       toWireframe(octa, event);
-      window.open("https://iam149cm.github.io/naatCamp/3_Drum-Kit/index.html");
+      window.open("https://iam149cm.github.io/naatCamp/3_Drum-Kit/");
     })
 
     sp.on('touchend', (event) => {
       toWireframe(sp, event);
-      window.open("https://sleepy-reading-7bf.notion.site/CV-c0e73f41082f4b7fbd71a2c90c9aa305");
+      window.open("https://iam149cm.github.io/naatCamp/4_Simon-Game/");
 
     })
 
