@@ -15,3 +15,8 @@ function music() {
     audioContainer.loop = true
     audioContainer.play()
     }
+
+
+$(document).on(document.event, () => {
+    console.log('event!!' , document.event);
+})

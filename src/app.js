@@ -3,6 +3,7 @@ import { WEBGL } from './webgl'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Interaction } from 'three.interaction'; 
 import { TWEEN } from 'three/examples/jsm/libs/tween.module.min';
+import tippy, {followCursor} from 'tippy.js';
 
 
 if (WEBGL.isWebGLAvailable()) {
@@ -99,6 +100,7 @@ if (WEBGL.isWebGLAvailable()) {
     roughness : 5  
     });
   const sphere = new THREE.Mesh( geometrySphear, materialSphear );
+  sphere.name = "sphere";
   sphere.castShadow = true;
   sphere.receiveShadow = true; 
   scene.add( sphere );
@@ -108,7 +110,7 @@ if (WEBGL.isWebGLAvailable()) {
    const textureNormal_ico = textureLoader.load(path+'/static/img/material/Sapphire_001_NORM.jpg'); 
    const textureRoughness_ico = textureLoader.load(path+'/static/img/material/Sapphire_001_ROUGH.jpg'); 
 
-  const geometryIco = new THREE.IcosahedronGeometry(50);
+  const geometryIco = new THREE.IcosahedronGeometry(40);
   const materialIco = new THREE.MeshStandardMaterial( 
     { 
     transparent : true,
@@ -117,9 +119,10 @@ if (WEBGL.isWebGLAvailable()) {
     // refractionRatio: 100,
     displacementScale : 10, // 울퉁불퉁함 조절
     roughnessMap : textureRoughness_ico, // 거칠기에 따를 빛 표현 추가
-    roughness : 10 // 빛 반사 표현 조절
+    roughness : 10, // 빛 반사 표현 조절
     } );
   const icosa = new THREE.Mesh( geometryIco, materialIco );
+  icosa.name = "icosa";
   icosa.castShadow = true;
   icosa.receiveShadow = true; 
   icosa.position.set(400, 70, 30);
@@ -128,7 +131,7 @@ if (WEBGL.isWebGLAvailable()) {
   // 도형 - Octahedron (좌) ---------------------------------------------
   const textureBaseColor_octa = textureLoader.load(path+'/static/img/material/Crystal_001_COLOR.jpg'); 
   const textureNormal_octa = textureLoader.load(path+'/static/img/material/Crystal_001_NORM.jpg');  
-  const geometryOcta = new THREE.OctahedronGeometry(70);
+  const geometryOcta = new THREE.OctahedronGeometry(60);
   const materialIOcta = new THREE.MeshStandardMaterial( 
   { 
   transparent : true,
@@ -139,30 +142,32 @@ if (WEBGL.isWebGLAvailable()) {
   roughness : 10 // 빛 반사 표현 조절
   } );
   const octa = new THREE.Mesh( geometryOcta, materialIOcta );
+  octa.name="octa";
   octa.castShadow = true;
   octa.receiveShadow = true; 
   octa.position.set(-300, 70, 130);
   scene.add( octa );
 
-    // 도형 - sphear (하) ---------------------------------------------
-    const textureBaseColor_sp = textureLoader.load(path+'/static/img/material/Malachite_001_basecolor.jpg'); 
-    const textureNormal_sp = textureLoader.load(path+'/static/img/material/Malachite_001_normal.jpg');  
-    const geometrySp = new THREE.SphereGeometry(60);
-    const materialSp = new THREE.MeshStandardMaterial( 
-    { 
-  
-    transparent : true,
-    map : textureBaseColor_sp,
-    normalMap : textureNormal_sp,
-    // refractionRatio: 100,
-    displacementScale : 10, // 울퉁불퉁함 조절
-    roughness : 10, // 빛 반사 표현 조절
-    } );
-    const sp = new THREE.Mesh( geometrySp, materialSp );
-    sp.castShadow = true;
-    sp.receiveShadow = true; 
-    sp.position.set(-40, -280, 150);
-    scene.add( sp );
+  // 도형 - sphear (하) ---------------------------------------------
+  const textureBaseColor_sp = textureLoader.load(path+'/static/img/material/Malachite_001_basecolor.jpg'); 
+  const textureNormal_sp = textureLoader.load(path+'/static/img/material/Malachite_001_normal.jpg');  
+  const geometrySp = new THREE.SphereGeometry(60);
+  const materialSp = new THREE.MeshStandardMaterial( 
+  { 
+  opacity : 0.7 ,
+  transparent : true,
+  map : textureBaseColor_sp,
+  normalMap : textureNormal_sp,
+  // refractionRatio: 100,
+  // displacementScale : 10, // 울퉁불퉁함 조절
+  roughness : 10, // 빛 반사 표현 조절
+  } );
+  const sp = new THREE.Mesh( geometrySp, materialSp );
+  sp.name = "sp";
+  sp.castShadow = true;
+  sp.receiveShadow = true; 
+  sp.position.set(-40, -280, 150);
+  scene.add( sp );
 
 
     
@@ -173,18 +178,27 @@ if (WEBGL.isWebGLAvailable()) {
       music();
     })
 
- 
-    // mouseover ---------------------------------------------
+
+   
+    // mouseover ---------------------------------------------   
     icosa.on('mouseover', (event) => {
       toWireframe(icosa, event);
+      tooltipText ="icosa";
+      console.log(  document.querySelector("Mesh"));
+      tippy(scene.getObjectByName('icosa'), {
+        followCursor: true,
+        plugins: [followCursor],
+      });
     })
 
     octa.on('mouseover', (event) => {
       toWireframe(octa, event);
+      tooltipText ="octa";
     })
 
     sp.on('mouseover', (event) => {
       toWireframe(sp, event);
+      tooltipText ="sp";
     })
 
     // mouseout ---------------------------------------------
@@ -274,6 +288,7 @@ if (WEBGL.isWebGLAvailable()) {
   animate();
 
   function render(){
+   
     renderer.render(scene,camera);
   }
 
@@ -293,6 +308,7 @@ if (WEBGL.isWebGLAvailable()) {
 
 // function -------------------------------------
 let targetOpacity = 0;
+let tooltipText = "";
 
 function fade(mesh){
   
@@ -310,13 +326,17 @@ function fade(mesh){
 }
 
 function toWireframe(mesh, event) {
-  // console.log("Mesh :::" , mesh , "event ::: ", event.type);
+  console.log("mesh :::" , mesh.name ,"/ uuid :::" , mesh.uuid , "/ event ::: ", event.type);
 
   if (event.type === 'mouseover' || event.type === 'touchstart' ) {
     mesh.material.wireframe = true;
+    // console.log("uuid : " ,mesh.uuid);
+
   } else if (event.type === 'mouseout' || event.type === 'touchend') {
     mesh.material.wireframe = false;
+    tooltipText = "";
   }
 
 }
 
+ 

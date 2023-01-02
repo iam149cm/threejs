@@ -66,4 +66,6 @@ body{
 }
 
 
- 
+ tippy {
+  z-index: 1; 
+ }
