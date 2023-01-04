@@ -110,7 +110,7 @@ if (WEBGL.isWebGLAvailable()) {
    const textureNormal_ico = textureLoader.load(path+'/static/img/material/Sapphire_001_NORM.jpg'); 
    const textureRoughness_ico = textureLoader.load(path+'/static/img/material/Sapphire_001_ROUGH.jpg'); 
 
-  const geometryIco = new THREE.IcosahedronGeometry(40);
+  const geometryIco = new THREE.IcosahedronGeometry(60);
   const materialIco = new THREE.MeshStandardMaterial( 
     { 
     transparent : true,
@@ -183,22 +183,20 @@ if (WEBGL.isWebGLAvailable()) {
     // mouseover ---------------------------------------------   
     icosa.on('mouseover', (event) => {
       toWireframe(icosa, event);
-      tooltipText ="icosa";
-      console.log(  document.querySelector("Mesh"));
-      tippy(scene.getObjectByName('icosa'), {
-        followCursor: true,
-        plugins: [followCursor],
-      });
     })
 
     octa.on('mouseover', (event) => {
       toWireframe(octa, event);
-      tooltipText ="octa";
+    
     })
 
     sp.on('mouseover', (event) => {
       toWireframe(sp, event);
-      tooltipText ="sp";
+
+    })
+
+    sphere.on('mouseover', (event) => {
+      // toWireframe(sphere, event);
     })
 
     // mouseout ---------------------------------------------
@@ -220,15 +218,13 @@ if (WEBGL.isWebGLAvailable()) {
 
     // click ---------------------------------------------
     icosa.on('click', (event) => {
-      window.open("https://iam149cm.github.io/naatCamp/2_TinDog/");
+      window.open("https://iam149cm.github.io/naatCamp/");
     })
       
     sp.on('click', (event) => {
-      window.open("https://iam149cm.github.io/naatCamp/4_Simon-Game/");
     })
       
     octa.on('click', (event) => {
-      window.open("https://iam149cm.github.io/naatCamp/3_Drum-Kit/")
     })
     
 
@@ -249,6 +245,7 @@ if (WEBGL.isWebGLAvailable()) {
     sp.on('touchstart', (event) => {
       toWireframe(sp, event);
     })
+
     sphere.on('touchstart', (event) => {
       // toWireframe(sphere, event);
     })
@@ -256,18 +253,16 @@ if (WEBGL.isWebGLAvailable()) {
     // touchend ---------------------------------------------
     icosa.on('touchend', (event) => {
       toWireframe(icosa, event);
-      window.open("https://iam149cm.github.io/naatCamp/2_TinDog/");
+      window.open("https://iam149cm.github.io/naatCamp/");
       
     })
 
     octa.on('touchend', (event) => {
       toWireframe(octa, event);
-      window.open("https://iam149cm.github.io/naatCamp/3_Drum-Kit/");
     })
 
     sp.on('touchend', (event) => {
       toWireframe(sp, event);
-      window.open("https://iam149cm.github.io/naatCamp/4_Simon-Game/");
 
     })
 
@@ -328,13 +323,12 @@ function fade(mesh){
 function toWireframe(mesh, event) {
   console.log("mesh :::" , mesh.name ,"/ uuid :::" , mesh.uuid , "/ event ::: ", event.type);
 
+
   if (event.type === 'mouseover' || event.type === 'touchstart' ) {
     mesh.material.wireframe = true;
-    // console.log("uuid : " ,mesh.uuid);
 
   } else if (event.type === 'mouseout' || event.type === 'touchend') {
     mesh.material.wireframe = false;
-    tooltipText = "";
   }
 
 }
