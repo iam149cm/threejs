@@ -65,7 +65,6 @@ body{
   display: block;
 }
 
-
- tippy {
+.tooltip {
   z-index: 1; 
  }

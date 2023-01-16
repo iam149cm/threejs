@@ -3,7 +3,7 @@ import { WEBGL } from './webgl'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Interaction } from 'three.interaction'; 
 import { TWEEN } from 'three/examples/jsm/libs/tween.module.min';
-import tippy, {followCursor} from 'tippy.js';
+
 
 
 if (WEBGL.isWebGLAvailable()) {
@@ -169,9 +169,6 @@ if (WEBGL.isWebGLAvailable()) {
   sp.position.set(-40, -280, 150);
   scene.add( sp );
 
-
-    
-
     // interaction ---------------------------------------------
     scene.on('click', (event) => {
       $('.welcome').fadeOut();
@@ -180,7 +177,8 @@ if (WEBGL.isWebGLAvailable()) {
 
 
    
-    // mouseover ---------------------------------------------   
+    // mouseover ---------------------------------------------
+
     icosa.on('mouseover', (event) => {
       toWireframe(icosa, event);
     })
@@ -217,11 +215,12 @@ if (WEBGL.isWebGLAvailable()) {
     })
 
     // click ---------------------------------------------
-    icosa.on('click', (event) => {
-      window.open("https://iam149cm.github.io/naatCamp/");
+    icosa.on('click', (event) => { 
+      window.open("https://sleepy-reading-7bf.notion.site/6f3b6634f89f45ca9b11df0854ea27d0");
     })
       
     sp.on('click', (event) => {
+      window.open("https://iam149cm.github.io/naatCamp/");
     })
       
     octa.on('click', (event) => {
@@ -253,7 +252,7 @@ if (WEBGL.isWebGLAvailable()) {
     // touchend ---------------------------------------------
     icosa.on('touchend', (event) => {
       toWireframe(icosa, event);
-      window.open("https://iam149cm.github.io/naatCamp/");
+      window.open("https://sleepy-reading-7bf.notion.site/6f3b6634f89f45ca9b11df0854ea27d0");
       
     })
 
@@ -263,7 +262,7 @@ if (WEBGL.isWebGLAvailable()) {
 
     sp.on('touchend', (event) => {
       toWireframe(sp, event);
-
+      window.open("https://iam149cm.github.io/naatCamp/");
     })
 
 
