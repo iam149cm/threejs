@@ -215,31 +215,32 @@ if (WEBGL.isWebGLAvailable()) {
     })
 
     // click ---------------------------------------------
-    icosa.on('click', (event) => { 
-      window.open("https://sleepy-reading-7bf.notion.site/6f3b6634f89f45ca9b11df0854ea27d0");
+    octa.on('click', (event) => { // cv
+      window.open("https://iam149cm.notion.site/CV-c0e73f41082f4b7fbd71a2c90c9aa305");
     })
-      
-    sp.on('click', (event) => {
+
+    icosa.on('click', (event) => { // pf
+      window.open("https://iam149cm.notion.site/6f3b6634f89f45ca9b11df0854ea27d0");
+    })
+    
+    sp.on('click', (event) => { // git-page
       window.open("https://iam149cm.github.io/naatCamp/");
     })
       
-    octa.on('click', (event) => {
-    })
-    
 
     // touchstart ---------------------------------------------
     scene.on('touchstart', (event) => {
       $('.welcome').fadeOut();
       music();
     })
-
-  icosa.on('touchstart', (event) => {
-      toWireframe(icosa, event);
-    })
-
+    
     octa.on('touchstart', (event) => {
       toWireframe(octa, event);
     })
+
+    icosa.on('touchstart', (event) => {
+        toWireframe(icosa, event);
+      })
 
     sp.on('touchstart', (event) => {
       toWireframe(sp, event);
@@ -250,17 +251,16 @@ if (WEBGL.isWebGLAvailable()) {
     })
 
     // touchend ---------------------------------------------
-    icosa.on('touchend', (event) => {
-      toWireframe(icosa, event);
-      window.open("https://sleepy-reading-7bf.notion.site/6f3b6634f89f45ca9b11df0854ea27d0");
-      
-    })
-
-    octa.on('touchend', (event) => {
+    octa.on('touchend', (event) => { // cv
       toWireframe(octa, event);
+      window.open("https://iam149cm.notion.site/CV-c0e73f41082f4b7fbd71a2c90c9aa305")
+    })
+    icosa.on('touchend', (event) => { // pf
+      toWireframe(icosa, event);
+      window.open("https://iam149cm.notion.site/6f3b6634f89f45ca9b11df0854ea27d0");
     })
 
-    sp.on('touchend', (event) => {
+    sp.on('touchend', (event) => { // git-page
       toWireframe(sp, event);
       window.open("https://iam149cm.github.io/naatCamp/");
     })
