@@ -223,7 +223,7 @@ if (WEBGL.isWebGLAvailable()) {
       window.open("https://iam149cm.notion.site/6f3b6634f89f45ca9b11df0854ea27d0");
     })
     
-    sp.on('click', (event) => { // git-page
+    sp.on('click', (event) => { // linked-in
       window.open("https://www.linkedin.com/in/nayoung-kim-5315a01b5/");
     })
       
@@ -260,9 +260,9 @@ if (WEBGL.isWebGLAvailable()) {
       window.open("https://iam149cm.notion.site/6f3b6634f89f45ca9b11df0854ea27d0");
     })
 
-    sp.on('touchend', (event) => { // git-page
+    sp.on('touchend', (event) => { // linked-in
       toWireframe(sp, event);
-      window.open("https://iam149cm.github.io/naatCamp/");
+      window.open("https://www.linkedin.com/in/nayoung-kim-5315a01b5/");
     })
 
 
