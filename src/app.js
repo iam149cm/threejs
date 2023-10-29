@@ -224,7 +224,7 @@ if (WEBGL.isWebGLAvailable()) {
     })
     
     sp.on('click', (event) => { // git-page
-      window.open("https://iam149cm.github.io/naatCamp/");
+      window.open("https://www.linkedin.com/in/nayoung-kim-5315a01b5/");
     })
       
 
